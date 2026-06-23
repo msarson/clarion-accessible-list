@@ -16,6 +16,7 @@
               LresultFromObject(LONG riid, LONG wParam, LONG pUnk),LONG,PASCAL,RAW,NAME('LresultFromObject')
             END
             AccList_WndProc(LONG hWnd, LONG uMsg, LONG wParam, LONG lParam),LONG,PASCAL
+            INCLUDE('AccListLink.inc'),ONCE       ! AccListAttach / AccListNotify / AccListDetach
           END
 
 !GWL_WNDPROC             EQUATE(-4)        ! already defined by svapi.inc (via svcom.inc)
@@ -383,3 +384,40 @@ lres                LONG
     IF lres > 0 THEN RETURN lres.
   END
   RETURN CallWindowProc(old, hWnd, uMsg, wParam, lParam)
+
+! ============================================================================
+!  Template helpers - called from the browse method embeds (AccBrowse template).
+!  ownerKey is ADDRESS(SELF) of the browse: stable and unique per browse, and
+!  available in Init / TakeNewSelection / Kill alike.
+! ============================================================================
+AccListAttach     PROCEDURE(SIGNED pFeq, *QUEUE pQ, LONG pOwnerKey)
+acc                 &AccListCls
+  CODE
+  acc &= NEW AccListCls
+  acc.OwnerKey = pOwnerKey
+  acc.Init(pFeq, pQ)                                  ! subclasses + self-registers by hWnd
+
+AccListNotify     PROCEDURE(LONG pOwnerKey)
+i                   LONG
+  CODE
+  LOOP i = 1 TO RECORDS(AccRegQ)
+    GET(AccRegQ, i)
+    IF ~AccRegQ.RegObj &= NULL AND AccRegQ.RegObj.OwnerKey = pOwnerKey
+      AccRegQ.RegObj.NotifySelection()
+      BREAK
+    END
+  END
+
+AccListDetach     PROCEDURE(LONG pOwnerKey)
+i                   LONG
+acc                 &AccListCls
+  CODE
+  LOOP i = RECORDS(AccRegQ) TO 1 BY -1
+    GET(AccRegQ, i)
+    IF ~AccRegQ.RegObj &= NULL AND AccRegQ.RegObj.OwnerKey = pOwnerKey
+      acc &= AccRegQ.RegObj
+      acc.Kill()                                      ! restore subclass, deregister (removes this row)
+      acc.Release()                                   ! drop our ref; frees when COM is also done
+      BREAK
+    END
+  END

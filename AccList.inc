@@ -57,6 +57,7 @@ NameTxt                   CSTRING(128)                                ! optional
 Feq                       LONG
 hWnd                      LONG
 OldProc                   LONG
+OwnerKey                  LONG                                        ! stable id used by the template helpers (ADDRESS of the browse)
 Q                         &QUEUE
 QueryInterface            PROCEDURE(LONG riid, *LONG ppvObject),HRESULT,DERIVED
 RowCount                  PROCEDURE(),LONG,PROTECTED

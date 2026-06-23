@@ -25,7 +25,10 @@ reports the list, its rows, the selection, and live focus changes.
 | `AccDemo.clw` | Demo program: **two** lists with different schemas (text vs numeric/decimal) proving the generic renderer and multi-control routing. |
 | `AccDemo.cwproj` / `AccDemo.sln` | Buildable project for the demo. |
 | `oleacc.lib` | 32-bit import library for `oleacc.dll` (see below). |
+| `AccListLink.inc` | Prototypes for the template helper procedures (added to the global map by the template). |
+| `AccBrowse.tpl` | **Global ABC extension** — makes *every* browse accessible with no per-browse code. |
 | `INTEGRATION.md` | Step-by-step for adding it to your own app (hand-coded **and** ABC). |
+| `TEMPLATE.md` | The global-extension template: design, install, and verification. |
 
 ---
 
@@ -206,9 +209,9 @@ keep them:
 - No sorting/locator announcements yet.
 - Object lifetime is window-scoped and not `DISPOSE`d on close (sidesteps a COM
   ref-count trap); a production build can add a final `Release`.
-- A **global extension template** to auto-apply `Init`/`NotifySelection`/`Kill`
-  across hundreds of controls is the intended next step (in ABC the queue comes
-  straight from the `BrowseClass`).
+- A **global extension template** to auto-apply across hundreds of browses ships
+  as `AccBrowse.tpl` — see [TEMPLATE.md](TEMPLATE.md). (Per-row `accLocation`,
+  `DROP` controls, and sort/locator announcements remain on the list.)
 
 ---
 
