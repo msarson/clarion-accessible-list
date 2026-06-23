@@ -1,0 +1,22 @@
+# Clarion source MUST stay CRLF or the compiler errors. Force it on checkout
+# regardless of the cloning machine's core.autocrlf setting.
+*.clw    text eol=crlf
+*.inc    text eol=crlf
+*.equ    text eol=crlf
+*.int    text eol=crlf
+*.txa    text eol=crlf
+*.trn    text eol=crlf
+*.tpl    text eol=crlf
+*.tpw    text eol=crlf
+*.cwproj text eol=crlf
+*.sln    text eol=crlf
+
+# Repo docs
+*.md     text eol=lf
+
+# Binary: never touch line endings
+*.lib    binary
+*.dll    binary
+*.exe    binary
+*.ico    binary
+*.png    binary

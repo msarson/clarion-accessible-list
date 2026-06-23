@@ -1,0 +1,35 @@
+# ---- Clarion build output (generated) ----
+obj/
+map/
+bin/
+*.exe
+*.dll
+*.map
+*.pdb
+*.lnk
+*.obj
+*.res
+*.rsc
+*.RED
+*.tmp
+
+# ---- IDE / cache / index (generated) ----
+*.sln.cache
+*.codegraph.db
+*.dck
+*.~*
+.clarion/
+.claude/
+
+# ---- the original single-file experiment's project ----
+Test.cwproj
+Test.sln
+Test.sln.cache
+
+# ---- misc local artifacts ----
+*.zip
+
+# ---- NOTE ----
+# oleacc.lib is intentionally NOT ignored: it is the 32-bit import library
+# (made with LibMaker from C:\Windows\SysWOW64\oleacc.dll) and is committed
+# for convenience. Regenerate it if your toolchain rejects the committed copy.
