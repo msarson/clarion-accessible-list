@@ -33,3 +33,6 @@ Test.sln.cache
 # oleacc.lib is intentionally NOT ignored: it is the 32-bit import library
 # (made with LibMaker from C:\Windows\SysWOW64\oleacc.dll) and is committed
 # for convenience. Regenerate it if your toolchain rejects the committed copy.
+
+# scratch single-file version used while working it out (kept locally, not shipped)
+examples/

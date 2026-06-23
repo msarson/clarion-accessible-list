@@ -25,7 +25,6 @@ reports the list, its rows, the selection, and live focus changes.
 | `AccDemo.clw` | Demo program: **two** lists with different schemas (text vs numeric/decimal) proving the generic renderer and multi-control routing. |
 | `AccDemo.cwproj` / `AccDemo.sln` | Buildable project for the demo. |
 | `oleacc.lib` | 32-bit import library for `oleacc.dll` (see below). |
-| `examples/AccessibleList.clw` | The same thing as a single self-contained `PROGRAM` — handy for reading the whole flow top-to-bottom. |
 | `INTEGRATION.md` | Step-by-step for adding it to your own app (hand-coded **and** ABC). |
 
 ---
